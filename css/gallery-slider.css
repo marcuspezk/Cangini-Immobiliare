@@ -1,0 +1,238 @@
+/* gallery-slider.css */
+.gallery {
+    width: 100%;
+    margin: 0px auto 0px auto;
+    padding: 20px 0 0px 0;
+
+    background-image: url(../assets/images/city-landscape-14.jpg);
+    background-position: top;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.gallery-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 25px;
+    /*box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);*/
+    box-shadow: 1.4px 1.4px 2px #0000004b;
+    border-radius: 8px;
+    overflow: hidden;
+}
+/* Slideshow principale */
+.main-slideshow {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    background-color: #f5f5f5;
+    touch-action: pan-y; /* Permette lo scroll verticale ma gestiremo pan-x con JavaScript */
+    user-select: none; /* Impedisce la selezione del testo durante lo swipe */
+    -webkit-user-select: none;
+}
+/* Frecce di navigazione per lo slideshow principale */
+.slide-nav-arrow {
+    background-color: #f8f0e1;
+    border-top: 3px solid #fdf7ed;
+    border-left: 3px solid #fdf7ed;
+    border-bottom: 3px solid #e4d9c5;
+    border-right: 3px solid #e4d9c5;
+    box-shadow: 1.4px 1.4px 2px #0000004b;
+
+    /*
+    background-color: #6a1b31;
+    border-top: 3px solid #7c203a;
+    border-left: 3px solid #7c203a;
+    border-bottom: 3px solid #5a172a;
+    border-right: 3px solid #5c172b;
+    box-shadow: 1.4px 1.4px 2px #0000004b;
+    */
+
+    /*background-color: rgba(255, 255, 255, 0.9);*/
+    border-radius: 8px;
+
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    color: #464646;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    /*transition: all 0.3s ease;*/
+    /*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);*/
+}
+.slide-nav-arrow:hover {
+    background-color: #ebe0cd;
+    border-top: 3px solid #f3e9d8;
+    border-left: 3px solid #f3e9d8;
+    border-bottom: 3px solid #ccc3b1;
+    border-right: 3px solid #ccc3b1;
+
+    color: #3d3d3d;
+}
+.slide-nav-prev {
+    left: 20px;
+}
+.slide-nav-next {
+    right: 20px;
+}
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    display: none;
+}
+.slide.active {
+    opacity: 1;
+    display: block;
+}
+.slide-image {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.slide-caption {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: auto;
+    padding: 5px 15px;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #333;
+    font-size: medium;
+    text-align: center;
+    border-radius: 4px;
+    /*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);*/
+}
+/* Navigazione anteprime */
+.thumbnails-container {
+    display: flex;
+    align-items: center;
+    background-color: #424a52;
+    padding: 10px;
+    position: relative;
+    touch-action: pan-x; /* Ottimizzazione per touch */
+}
+.thumbnails-wrapper {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    -webkit-overflow-scrolling: touch; /* Migliora lo scorrimento sui dispositivi iOS */
+}
+.thumbnails {
+    display: flex;
+    transition: transform 0.3s ease;
+}
+.thumbnail {
+    min-width: 120px;
+    height: 80px;
+    margin: 0 5px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    /*transition: all 0.3s ease;*/
+    opacity: 0.6;
+    flex-shrink: 0;
+    touch-action: manipulation; /* Migliora la risposta al tocco */
+}
+.thumbnail:hover {
+    opacity: 0.9;
+}
+.thumbnail.active {
+    border-color: #fff;
+    opacity: 1;
+}
+.thumb-image {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+/* Frecce di navigazione */
+.nav-arrow {
+    width: 34px;
+    height: 34px;
+    background-color: #838f9b;
+    border: none;
+    border-radius: 8px;
+    color: #333;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 5px;
+    /*transition: background-color 0.3s;*/
+    z-index: 10;
+}
+.nav-arrow:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+.nav-arrow:focus {
+    outline: none;
+}
+/* Responsive */
+@media (max-width: 768px) {
+    .main-slideshow {
+        height: 350px;
+    }
+   
+    .thumbnail {
+        min-width: 80px;
+        height: 60px;
+    }
+   
+    .nav-arrow, .slide-nav-arrow {
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+    }
+    
+    .slide-caption {
+        font-size: 14px;
+        right: 10px;
+        top: 10px;
+        padding: 8px 12px;
+    }
+    
+    .slide-nav-prev {
+        left: 10px;
+    }
+    
+    .slide-nav-next {
+        right: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-slideshow {
+        height: 250px;
+    }
+   
+    .thumbnail {
+        min-width: 60px;
+        height: 40px;
+    }
+    
+    .slide-caption {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+    
+    /* Ingrandisci leggermente pulsanti su mobile per un tocco più facile */
+    .nav-arrow, .slide-nav-arrow {
+        width: 36px;
+        height: 36px;
+    }
+}
